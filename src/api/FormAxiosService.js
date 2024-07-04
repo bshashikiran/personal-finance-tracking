@@ -1,8 +1,8 @@
 import axios from "axios";
 
-const PATH = "http://localhost:8080/personalfinancetrackingapi/";
+const API_BASE_URL = "http://localhost:8080/personalfinancetrackingapi/";
 
 export const getPersonalDetails = async (mobile) => {
-    const result = await axios.get(PATH + "user/getPersonalData?mobile=" + mobile);
+    const result = await axios.get(API_BASE_URL + "user/getPersonalData?mobile=" + mobile);
     return result.data;
 }
