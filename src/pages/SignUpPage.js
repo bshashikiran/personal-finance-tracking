@@ -1,6 +1,8 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import * as FormAxiosService from '../api/FormAxiosService'
 import InputComponent from '../components/InputComponent';
+import { showErrorMsg } from '../common/Common';
+import * as Validation from '../common/Validation';
 
 const SignUpPage = ({ loginData, onChangeHandler, switchPages }) => {
 
@@ -24,18 +26,27 @@ const SignUpPage = ({ loginData, onChangeHandler, switchPages }) => {
     const saveUser = async () => {
         try {
             const response = await FormAxiosService.saveUser(loginData);
-            if(response != null) {
+            if(response != null && response.status === 200) {
                 console.log("User record saved successfully");
+                showErrorMsg("confirmPassword", response.message);
             } else {
                 console.log("Response is NULL while saving user record");
             }
         } catch (error) {
-            console.error()
+            console.error('Error occured while saving user record : ', error);
+            showErrorMsg("confirmPassword", error.response.data.message);
         }
     }
 
     const signUpHandle = (e) => {
         e.preventDefault();
+        const isValidUserName = Validation.validateString(loginData.userName, 'userName', 'Username is not valid');
+        const isValidPassword = Validation.validateString(loginData.password, 'password', 'Password is not valid');
+        console.log("isValidUserName : ", isValidUserName);
+        console.log("isValidPassword : ", isValidPassword);
+        if (!isValidUserName || !isValidPassword) {
+            return;
+        }
         saveUser();
     }
 

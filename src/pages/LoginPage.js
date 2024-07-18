@@ -14,15 +14,15 @@ const LoginPage = () => {
   const authenticateUser = async () => {
     try {
       const response = await FormAxiosService.authenticateUser(loginData);
-      if (response != null) {
+      if (response != null && response.status === 200) {
         console.log(response);
-        showErrorMsg("password", response);
+        showErrorMsg("password", response.message);
       } else {
         console.log("Response is NULL while authenticating user");
       }
     } catch (error) {
       console.error('Error occured while authenticating user : ', error);
-      showErrorMsg("password", error.response.data);
+      showErrorMsg("password", error.response.data.message);
     }
   }
 
