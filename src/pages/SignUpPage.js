@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import * as FormAxiosService from '../api/FormAxiosService'
+import InputComponent from '../components/InputComponent';
 
 const SignUpPage = ({ loginData, onChangeHandler, switchPages }) => {
 
@@ -41,21 +42,21 @@ const SignUpPage = ({ loginData, onChangeHandler, switchPages }) => {
     return (
         <>
             <form onSubmit={signUpHandle}>
-                <input 
+                <InputComponent
                     type='text'
                     placeholder='Username'
                     name='userName'
                     id='userName'
                     onChange={(e) => onChangeHandler(e)} 
                 />
-                <input 
+                <InputComponent 
                     type='password'
                     placeholder='Password'
                     name='password'
                     id='password'
                     onChange={(e) => onChangeHandler(e)}
                 />
-                <input 
+                <InputComponent 
                     type='password'
                     placeholder='Confirm Password'
                     name='confirmPassword'

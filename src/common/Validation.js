@@ -1,13 +1,9 @@
-export const isString = (value, type) => {
-    let errorBlock = document.getElementById(`${type}-Error`);
-    if (
-        value === "" ||
-        value.trim().length < 3 ||
-        !value.match(/^[a-zA-Z ]+$/i) ||
-        value.match(/^\s/)
-    ) {
-        errorBlock.style.display = 'block';
-        setTimeout(function () { errorBlock.style.display = 'none'; }, 5000);
+import { showErrorMsg } from "./Common";
+
+export const validateString = (value, fieldName, errorMsg) => {
+    let errorBlock = document.getElementById(`${fieldName}-Error`);
+    if (value === "") {
+        showErrorMsg(fieldName, errorMsg);
     } else {
         errorBlock.style.display = 'none';
         return true;

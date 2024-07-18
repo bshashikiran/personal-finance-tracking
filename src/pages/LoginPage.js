@@ -3,6 +3,7 @@ import * as FormAxiosService from '../api/FormAxiosService'
 import * as Validation from '../common/Validation';
 import SignUpPage from './SignUpPage';
 import InputComponent from '../components/InputComponent';
+import { showErrorMsg } from '../common/Common';
 
 
 const LoginPage = () => {
@@ -15,11 +16,13 @@ const LoginPage = () => {
       const response = await FormAxiosService.authenticateUser(loginData);
       if (response != null) {
         console.log(response);
+        showErrorMsg("password", response);
       } else {
         console.log("Response is NULL while authenticating user");
       }
     } catch (error) {
       console.error('Error occured while authenticating user : ', error);
+      showErrorMsg("password", error.response.data);
     }
   }
 
@@ -34,9 +37,11 @@ const LoginPage = () => {
 
   const loginHandle = (e) => {
     e.preventDefault();
-    const a = Validation.isString(loginData.userName, 'userName');
-    console.log(a);
-    if(!a) {
+    const isValidUserName = Validation.validateString(loginData.userName, 'userName', 'Username is not valid');
+    const isValidPassword = Validation.validateString(loginData.password, 'password', 'Password is not valid');
+    console.log("isValidUserName : ", isValidUserName);
+    console.log("isValidPassword : ", isValidPassword);
+    if(!isValidUserName || !isValidPassword) {
       return;
     }
     authenticateUser();
@@ -60,7 +65,7 @@ const LoginPage = () => {
           id='userName'
           onChange={(e) => onChangeHandler(e)}
         />
-        <input
+        <InputComponent 
           type='password'
           placeholder='Password'
           name='password'
