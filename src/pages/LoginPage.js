@@ -22,7 +22,11 @@ const LoginPage = ({ setIsAuthenticated }) => {
       }
     } catch (error) {
       console.error('Error occured while authenticating user : ', error);
-      showErrorMsg("password", error.response.data.message);
+      if(error != null && error.response.data.status === 404) {
+        showErrorMsg("userName", error.response.data.message);
+      } else {
+        showErrorMsg("password", error.response.data.message);
+      }
     }
   }
 
