@@ -1,9 +1,9 @@
 import React from 'react'
 
-function NavigationBar() {
+const NavigationBar = () => {
   return (
     <div>
-      <h1>Nav Bar</h1>
+      <h3>NavigationBar</h3>
     </div>
   )
 }

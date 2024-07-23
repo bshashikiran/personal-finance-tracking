@@ -4,7 +4,7 @@ import InputComponent from '../components/InputComponent';
 import { showErrorMsg } from '../common/Common';
 import * as Validation from '../common/Validation';
 
-const SignUpPage = ({ loginData, onChangeHandler, switchPages, setIsAuthenticated }) => {
+const SignUpPage = ({ loginData, onChangeHandler, switchPages}) => {
 
     const [isPasswordMatch, setIsPasswordMatch] = useState(false);
 
@@ -14,7 +14,6 @@ const SignUpPage = ({ loginData, onChangeHandler, switchPages, setIsAuthenticate
             setIsPasswordMatch(true);
         } else {
             console.log("Password doesnot match");
-            // showErrorMsg("confirmPassword", "Password doesnot match");
             setIsPasswordMatch(false);
         }
     }, [loginData.password, loginData.confirmPassword]);
@@ -30,7 +29,6 @@ const SignUpPage = ({ loginData, onChangeHandler, switchPages, setIsAuthenticate
             if (response != null && response.status === 200) {
                 console.log("User record saved successfully");
                 showErrorMsg("confirmPassword", response.message);
-                setIsAuthenticated(true);
             } else {
                 console.log("Response is NULL while saving user record");
             }
@@ -44,8 +42,6 @@ const SignUpPage = ({ loginData, onChangeHandler, switchPages, setIsAuthenticate
         e.preventDefault();
         const isValidUserName = Validation.validateString(loginData.userName, 'userName', 'Invalid Username');
         const isValidPassword = Validation.validateString(loginData.password, 'password', 'Invalid Password');
-        console.log("isValidUserName : ", isValidUserName);
-        console.log("isValidPassword : ", isValidPassword);
         if (!isValidUserName || !isValidPassword) {
             return;
         }

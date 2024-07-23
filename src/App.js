@@ -1,18 +1,23 @@
-import { useState } from "react";
-import LoginPage from "./pages/LoginPage";
-import Dashboard from "./pages/Dashboard";
 import "../node_modules/bootstrap/dist/css/bootstrap-grid.min.css"
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Dashboard from "./pages/Dashboard";
+import LoginPage from "./pages/LoginPage";
 
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   return (
     <div className="App">
       {
-        isAuthenticated ? (<Dashboard />) : (<LoginPage setIsAuthenticated={setIsAuthenticated} />)
+        <Router>
+          <Routes>
+            <Route path="/" element={<LoginPage/>}/>
+            <Route path="/dashboard" element={<Dashboard/>}/>
+          </Routes>
+        </Router>
       }
+
     </div>
   );
 }
