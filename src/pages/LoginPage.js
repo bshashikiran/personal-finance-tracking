@@ -3,28 +3,24 @@ import * as FormAxiosService from '../api/FormAxiosService';
 import * as Validation from '../common/Validation';
 import SignUpPage from './SignUpPage';
 import InputComponent from '../components/InputComponent';
-import { showErrorMsg } from '../common/Common';
 
-const LoginPage = () => {
+const LoginPage = ({setIsAuthenticated}) => {
   const [loginData, setLoginData] = useState({ userName: '', password: '', confirmPassword: '' });
   const [showSignUpPage, setShowSignUpPage] = useState(false);
 
   const authenticateUser = async () => {
     try {
       const response = await FormAxiosService.authenticateUser(loginData);
-      if (response != null && response.status === 200) {
+      if (response != null && response !== '') {
         console.log(response);
-        showErrorMsg("password", response.message);
+        localStorage.setItem("authToken", response.authToken);
+        localStorage.setItem("expiresIn", response.expiresIn);
+        setIsAuthenticated(true);
       } else {
         console.log("Response is NULL while authenticating user");
       }
     } catch (error) {
-      console.error('Error occurred while authenticating user:', error);
-      if (error != null && error.response && error.response.data.status === 404) {
-        showErrorMsg("userName", error.response.data.message);
-      } else {
-        showErrorMsg("password", error.response.data.message);
-      }
+      console.error('Error occurred while authenticating user : ', error);
     }
   };
 
@@ -51,7 +47,7 @@ const LoginPage = () => {
   };
 
   if (showSignUpPage) {
-    return <SignUpPage loginData={loginData} onChangeHandler={onChangeHandler} switchPages={switchPages} />;
+    return <SignUpPage loginData={loginData} onChangeHandler={onChangeHandler} switchPages={switchPages} setIsAuthenticated={setIsAuthenticated}/>;
   }
 
   return (

@@ -1,10 +1,9 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import * as FormAxiosService from '../api/FormAxiosService'
 import InputComponent from '../components/InputComponent';
-import { showErrorMsg } from '../common/Common';
 import * as Validation from '../common/Validation';
 
-const SignUpPage = ({ loginData, onChangeHandler, switchPages}) => {
+const SignUpPage = ({ loginData, onChangeHandler, switchPages, setIsAuthenticated}) => {
 
     const [isPasswordMatch, setIsPasswordMatch] = useState(false);
 
@@ -23,18 +22,19 @@ const SignUpPage = ({ loginData, onChangeHandler, switchPages}) => {
         handlePassword();
     }, [handlePassword, loginData.password, loginData.confirmPassword]);
 
-    const saveUser = async () => {
+    const signup = async () => {
         try {
-            const response = await FormAxiosService.saveUser(loginData);
-            if (response != null && response.status === 200) {
-                console.log("User record saved successfully");
-                showErrorMsg("confirmPassword", response.message);
+            const response = await FormAxiosService.signup(loginData);
+            if (response != null && response !== '') {
+                console.log("User signed up successfully");
+                localStorage.setItem("authToken", response.authToken);
+                localStorage.setItem("expiresIn", response.expiresIn);
+                setIsAuthenticated(true);
             } else {
                 console.log("Response is NULL while saving user record");
             }
         } catch (error) {
             console.error('Error occured while saving user record : ', error);
-            showErrorMsg("confirmPassword", error.response.data.message);
         }
     }
 
@@ -45,7 +45,7 @@ const SignUpPage = ({ loginData, onChangeHandler, switchPages}) => {
         if (!isValidUserName || !isValidPassword) {
             return;
         }
-        saveUser();
+        signup();
     }
 
     return (
