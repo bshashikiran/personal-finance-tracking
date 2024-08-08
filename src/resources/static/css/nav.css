@@ -1,0 +1,39 @@
+.navbar {
+    background-color: lightskyblue;
+    padding: 0.25rem;
+}
+
+.navbar__menu {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.navbar__item {
+    text-align: center;
+    padding: 5px 130px 5px 130px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.navbar__item:hover {
+    background-color: lightcyan;
+    border-radius: 10cap;
+    color: black;
+}
+
+.navbar__profile-image {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    margin-right: 0.25rem;
+    margin-left: 0.25rem;
+    vertical-align: bottom;
+}
+
+.navbar__profile-image:hover {
+    cursor: pointer;
+}
