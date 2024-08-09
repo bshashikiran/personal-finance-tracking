@@ -14,15 +14,22 @@
 
 .navbar__item {
     text-align: center;
-    padding: 5px 130px 5px 130px;
+    padding: 5px 130px;
     font-weight: 500;
     cursor: pointer;
+    transition: background-color 0.4s ease, color 0.4s ease, box-shadow 0.4s ease;
 }
 
 .navbar__item:hover {
-    background-color: lightcyan;
-    border-radius: 10cap;
-    color: black;
+    background-color: rgba(173, 216, 230, 0.7);
+    border-radius: 10px;
+    color: #333;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.navbar__profile-container {
+    position: relative;
+    display: inline-block;
 }
 
 .navbar__profile-image {
@@ -32,8 +39,28 @@
     margin-right: 0.25rem;
     margin-left: 0.25rem;
     vertical-align: bottom;
+    transition: transform 0.3s ease;
 }
 
 .navbar__profile-image:hover {
     cursor: pointer;
+}
+
+.navbar__dropdown {
+    position: absolute;
+    top: 36px;
+    right: 0px;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    overflow: hidden;
+    z-index: 10;
+}
+
+.navbar__dropdown-item {
+    padding: 0px 10px 10px 10px;
+    cursor: pointer;
+    white-space: nowrap;
+    margin: 0px 0px 0px -30px;
+    list-style: none;
 }

@@ -8,33 +8,33 @@ const Dashboard = () => {
       <NavigationBar />
       <div className='container'>
         <section className='section'>
-          <div class="cards">
-            <a class="card income" href="/">
+          <div className="cards">
+            <a className="card income" href="/">
               <p>Total Income</p>
-              <p class="small">Card description with lots of great facts and interesting details.</p>
-              <div class="go-corner" href="#">
-                <div class="go-arrow">→</div>
+              <p className="small">Card description with lots of great facts and interesting details.</p>
+              <div className="go-corner">
+                <div className="go-arrow">→</div>
               </div>
             </a>
-            <a class="card expenses" href="/">
+            <a className="card expenses" href="/">
               <p>Total Expenses</p>
-              <p class="small">Card description with lots of great facts and interesting details.</p>
-              <div class="go-corner" href="#">
-                <div class="go-arrow">→</div>
+              <p className="small">Card description with lots of great facts and interesting details.</p>
+              <div className="go-corner">
+                <div className="go-arrow">→</div>
               </div>
             </a>
-            <a class="card savings" href="/">
+            <a className="card savings" href="/">
               <p>Total Savings</p>
-              <p class="small">Card description with lots of great facts and interesting details.</p>
-              <div class="go-corner" href="#">
-                <div class="go-arrow">→</div>
+              <p className="small">Card description with lots of great facts and interesting details.</p>
+              <div className="go-corner">
+                <div className="go-arrow">→</div>
               </div>
             </a>
-            <a class="card status" href="/">
+            <a className="card status" href="/">
               <p>Budget Status</p>
-              <p class="small">Card description with lots of great facts and interesting details.</p>
-              <div class="go-corner" href="#">
-                <div class="go-arrow">→</div>
+              <p className="small">Card description with lots of great facts and interesting details.</p>
+              <div className="go-corner">
+                <div className="go-arrow">→</div>
               </div>
             </a>
           </div>
