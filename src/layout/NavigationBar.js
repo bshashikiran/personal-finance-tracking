@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import defaultProfileImg from '../resources/static/images/profile.png';
 import '../resources/static/css/nav.css';
 
-const NavigationBar = () => {
+const NavigationBar = ({ setIsAuthenticated }) => {
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
 
   const handleDropdown = (e) => {
@@ -13,6 +13,16 @@ const NavigationBar = () => {
   const handleClickOutside = (e) => {
     if (!e.target.closest('.navbar__profile-container')) {
       setIsDropdownVisible(false);
+    }
+  };
+
+  const handleLogout = () => {
+    if(localStorage.getItem('authToken')) {
+      localStorage.removeItem('authToken');
+      setIsAuthenticated(false);
+    }
+    if(localStorage.getItem('expiresIn')) {
+      localStorage.removeItem('expiresIn');
     }
   };
 
@@ -46,7 +56,7 @@ const NavigationBar = () => {
           {isDropdownVisible && (
             <ul className="navbar__dropdown">
               <li className="navbar__dropdown-item">Edit Profile</li>
-              <li className="navbar__dropdown-item">Logout</li>
+              <li className="navbar__dropdown-item" onClick={handleLogout}>Logout</li>
             </ul>
           )}
         </li>

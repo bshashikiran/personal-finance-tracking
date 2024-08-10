@@ -4,18 +4,32 @@ import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-d
 import Dashboard from "./pages/Dashboard";
 import LoginPage from "./pages/LoginPage";
 import { useState, useEffect } from "react";
+import * as FormAxiosService from '../src/api/FormAxiosService';
 
 function App() {
 
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  useEffect(() => {
-    console.log("inside app.js useeffect");
+  const authenticateToken = async () => {
     const authToken = localStorage.getItem("authToken");
-    if (authToken) {
-      console.log("Inside App.js making setIsAuthenticated as true");
-      setIsAuthenticated(true);
+    try {
+      const response = await FormAxiosService.authenticateUserToken(authToken);
+      console.log("Validating Token...", response);
+      if (response && response === true) {
+        console.log("Inside true");
+        setIsAuthenticated(true);
+      } else {
+        console.log("Inside false");
+        setIsAuthenticated(false);
+      }
+    } catch (error) {
+      console.error("Error occured while authenticating auth token : ", error);
+      setIsAuthenticated(false);
     }
+  };
+
+  useEffect(() => {
+    authenticateToken();
   }, []);
   
   return (
@@ -28,7 +42,7 @@ function App() {
           />
           <Route
             path="/dashboard"
-            element={isAuthenticated ? <Dashboard /> : <Navigate to="/" />}
+            element={isAuthenticated ? <Dashboard setIsAuthenticated={setIsAuthenticated} /> : <Navigate to="/" />}
           />
         </Routes>
       </Router>

@@ -2,10 +2,10 @@ import React from 'react';
 import NavigationBar from '../layout/NavigationBar';
 import '../resources/static/css/dashboard.css';
 
-const Dashboard = () => {
+const Dashboard = ({ setIsAuthenticated }) => {
   return (
     <>
-      <NavigationBar />
+      <NavigationBar setIsAuthenticated={setIsAuthenticated} />
       <div className='container'>
         <section className='section'>
           <div className="cards">

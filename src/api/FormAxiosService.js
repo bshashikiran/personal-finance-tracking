@@ -16,3 +16,8 @@ export const getPersonalDetails = async (mobile) => {
     const result = await axios.get(API_BASE_URL + "user/getPersonalData?mobile=" + mobile);
     return result.data;
 }
+
+export const authenticateUserToken = async (authToken) => {
+    const result = await axios.get(API_BASE_URL + "auth/authenticate-token?authToken=" + authToken);
+    return result.data;
+}
